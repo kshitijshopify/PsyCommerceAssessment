@@ -1,4 +1,5 @@
 {{ 'section-blog-post.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
 
 <article class="article-template" itemscope itemtype="http://schema.org/BlogPosting">
   {%- for block in section.blocks -%}
@@ -60,7 +61,24 @@
           itemprop="articleBody"
           {{ block.shopify_attributes }}
         >
-          {{ article.content }}
+          {% assign product_sku = article.content | split: '<!--product-sku-->' %}
+          {% for articleContent in product_sku %}
+            {% assign articleContentHtmlStripe = articleContent | strip_html %}
+            {% assign articleContentHandle = articleContentHtmlStripe | handle %}
+            {% for product in collections.all.products %}
+              {% for variant in product.variants %}
+                {%- assign product_sku_1 = variant.sku | handle -%}
+                {% if product_sku_1 == articleContentHandle %}
+                  {% capture productData %}
+                      <div class="art_prod">
+                        {% render 'card-product', card_product: product, lazy_load: true, section_id: section.id, show_quick_add: true %}
+                      </div>
+                    {% endcapture %}
+                {% endif %}
+              {% endfor %}
+            {% endfor %}
+            {{ articleContent | append: productData }}
+          {% endfor %}
         </div>
 
       {%- when 'share' -%}
