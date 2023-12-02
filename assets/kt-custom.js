@@ -25,11 +25,11 @@ document.addEventListener("DOMContentLoaded", function () {
               const variant = product.variants[0];
               console.log(product);
               console.log(variant);
-              var variantUrl =
-                "https://assesmentcenter38.myshopify.com/products/" +
-                product.handle +
-                "?variant=" +
-                variant.id;
+              var variantUrl = "https://assesmentcenter38.myshopify.com/products/" + product.handle + "?variant=" + variant.id;
+              console.log(variant.id);
+              console.log(product.id);
+              const productId = product.id.split('/').pop(); // Extracts the last part after the last '/'
+              const variantId = product.variants[0].id.split('/').pop(); // Extracts the last part after the last '/'
               // var productTemplate = `
               //  <div class="product-wrap">
               //    <a href="${variantUrl}"> <img src="${product.images[0].src}" /></a>
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
               //      <a pid="${variant.id}" class="btn" href="#" onclick="addProductToCart(event, '${variantUrl}', '${product.id}')">In den Warenkorb</a>
               //   </div>`;
               const productTemplate = `
- <div class="card-wrapper product-card-wrapper underline-links-hover">
+<div class="card-wrapper product-card-wrapper underline-links-hover">
     <div class="card card--standard card--media" style="--ratio-percent: 100%">
       <div class="card__inner color-background-2 gradient ratio" style="--ratio-percent: 100%">
         <div class="card__media">
@@ -59,9 +59,9 @@ document.addEventListener("DOMContentLoaded", function () {
             <h3 class="card__heading">
               <a
                 href="/products/${product.handle}"
-                id="StandardCardNoMediaLink-template--${product.id}__main-8903969079581"
+                id="StandardCardNoMediaLink-template--${productId}__main-8903969079581"
                 class="full-unstyled-link"
-                aria-labelledby="StandardCardNoMediaLink-template--${product.id}__main-8903969079581 NoMediaStandardBadge-template--${product.id}__main-8903969079581"
+                aria-labelledby="StandardCardNoMediaLink-template--${productId}__main-8903969079581 NoMediaStandardBadge-template--${productId}__main-8903969079581"
               >
                 ${product.title}
               </a>
@@ -72,12 +72,12 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
       <div class="card__content">
         <div class="card__information">
-          <h3 class="card__heading h5" id="title-template--${product.id}__main-8903969079581">
+          <h3 class="card__heading h5" id="title-template--${productId}__main-8903969079581">
             <a
               href="/products/${product.handle}"
-              id="CardLink-template--${product.id}__main-8903969079581"
+              id="CardLink-template--${productId}__main-8903969079581"
               class="full-unstyled-link"
-              aria-labelledby="CardLink-template--${product.id}__main-8903969079581 Badge-template--${product.id}__main-8903969079581"
+              aria-labelledby="CardLink-template--${productId}__main-8903969079581 Badge-template--${productId}__main-8903969079581"
             >
               ${product.title}
             </a>
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <form
               method="post"
               action="/cart/add"
-              id="quick-add-template--${product.id}__main-8903969079581"
+              id="quick-add-template--${productId}__main-8903969079581"
               accept-charset="UTF-8"
               class="form"
               enctype="multipart/form-data"
@@ -123,14 +123,14 @@ document.addEventListener("DOMContentLoaded", function () {
             >
               <input type="hidden" name="form_type" value="product" />
               <input type="hidden" name="utf8" value="✓" />
-              <input type="hidden" name="id" value="${product.variants[0].id}" />
+              <input type="hidden" name="id" value="${variantId}" />
               <button
-                id="quick-add-template--${product.id}__main-8903969079581-submit"
+                id="quick-add-template--${productId}__main-8903969079581-submit"
                 type="submit"
                 name="add"
                 class="quick-add__submit button button--full-width button--secondary"
                 aria-haspopup="dialog"
-                aria-labelledby="quick-add-template--${product.id}__main-8903969079581-submit title-template--${product.id}__main-8903969079581"
+                aria-labelledby="quick-add-template--${productId}__main-8903969079581-submit title-template--${productId}__main-8903969079581"
                 aria-live="polite"
                 data-sold-out-message="true"
               >
@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
                   </svg>
                 </div>
               </button>
-              <input type="hidden" name="product-id" value="${product.id}" />
+              <input type="hidden" name="product-id" value="${productId}" />
             </form>
           </product-form>
         </div>
