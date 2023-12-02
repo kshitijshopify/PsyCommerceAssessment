@@ -66,9 +66,9 @@ document.addEventListener("DOMContentLoaded", function () {
                             <h3 class="card__heading">
                               <a
                                 href="/products/${product.handle}"
-                                id="StandardCardNoMediaLink-template--${productId}__main-8903969079581"
+                                id="StandardCardNoMediaLink-template--${productId}"
                                 class="full-unstyled-link"
-                                aria-labelledby="StandardCardNoMediaLink-template--${productId}__main-8903969079581 NoMediaStandardBadge-template--${productId}__main-8903969079581"
+                                aria-labelledby="StandardCardNoMediaLink-template--${productId} NoMediaStandardBadge-template--${productId}"
                               >
                                 ${product.title}
                               </a>
@@ -79,12 +79,12 @@ document.addEventListener("DOMContentLoaded", function () {
                       </div>
                       <div class="card__content">
                         <div class="card__information">
-                          <h3 class="card__heading h5" id="title-template--${productId}__main-8903969079581">
+                          <h3 class="card__heading h5" id="title-template--${productId}">
                             <a
                               href="/products/${product.handle}"
-                              id="CardLink-template--${productId}__main-8903969079581"
+                              id="CardLink-template--${productId}"
                               class="full-unstyled-link"
-                              aria-labelledby="CardLink-template--${productId}__main-8903969079581 Badge-template--${productId}__main-8903969079581"
+                              aria-labelledby="CardLink-template--${productId} Badge-template--${productId}"
                             >
                               ${product.title}
                             </a>
@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             <form
                               method="post"
                               action="/cart/add"
-                              id="quick-add-template--${productId}__main-8903969079581"
+                              id="quick-add-template--${productId}"
                               accept-charset="UTF-8"
                               class="form"
                               enctype="multipart/form-data"
@@ -132,12 +132,12 @@ document.addEventListener("DOMContentLoaded", function () {
                               <input type="hidden" name="utf8" value="✓" />
                               <input type="hidden" name="id" value="${variantId}" />
                               <button
-                                id="quick-add-template--${productId}__main-8903969079581-submit"
+                                id="quick-add-template--${productId}-submit"
                                 type="submit"
                                 name="add"
                                 class="quick-add__submit button button--full-width button--secondary"
                                 aria-haspopup="dialog"
-                                aria-labelledby="quick-add-template--${productId}__main-8903969079581-submit title-template--${productId}__main-8903969079581"
+                                aria-labelledby="quick-add-template--${productId}-submit title-template--${productId}"
                                 aria-live="polite"
                                 data-sold-out-message="true"
                               >
