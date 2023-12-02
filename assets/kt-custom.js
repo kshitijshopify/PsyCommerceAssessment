@@ -42,7 +42,6 @@ document.addEventListener("DOMContentLoaded", function () {
               //      <a pid="${variant.id}" class="btn" href="#" onclick="addProductToCart(event, '${variantUrl}', '${product.id}')">In den Warenkorb</a>
               //   </div>`;
               const productTemplate = `
-                <div class="art_prod">
                 <div class="card-wrapper product-card-wrapper underline-links-hover">
                     <div class="card card--standard card--media" style="--ratio-percent: 100%">
                       <div class="card__inner color-background-2 gradient ratio" style="--ratio-percent: 100%">
@@ -161,7 +160,6 @@ document.addEventListener("DOMContentLoaded", function () {
                       </div>
                     </div>
                   </div>
-                </div>
                 `;
               resolve({ sku: sku, template: productTemplate });
             } else {
