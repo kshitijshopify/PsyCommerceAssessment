@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', function () {
   var regex = /\[product="(.*?)"/g;
   var productSkus = [];
   var modifiedText = text;
-
+  var ShopifyBuy = window.ShopifyBuy;
+  
   var replaceProduct = function (sku) {
     var storefront = ShopifyBuy.buildClient({
       domain: 'assesmentcenter38.myshopify.com',
