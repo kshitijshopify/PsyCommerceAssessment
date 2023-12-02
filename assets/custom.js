@@ -15,7 +15,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     return new Promise(function (resolve, reject) {
       function fetchData(sku) {
-        // var skuplain = sku.replaceAll('<span>', '').replaceAll('</span>', '');
+        var skuplain = sku.replaceAll('<span>', '').replaceAll('</span>', '');
+        console.log(skuplain)
         return storefront.product.fetchQuery({ query: '\"' + skuplain + '\"' })
           .then(products => {
             if (products && products.length > 0) {
