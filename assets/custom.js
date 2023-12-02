@@ -23,7 +23,9 @@ document.addEventListener('DOMContentLoaded', function () {
         return storefront.product.fetchQuery({ query: '\"' + sku + '\"' })
           .then(products => {
             if (products && products.length > 0) {
-              resolve({ sku: sku, template: productTemplate });
+              console.log(products)
+              resolve();
+              // resolve({ sku: sku, template: productTemplate });
             } else {
               reject(sku);
             }
