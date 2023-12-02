@@ -24,7 +24,15 @@ document.addEventListener('DOMContentLoaded', function () {
           .then(products => {
             if (products && products.length > 0) {
               const product = products[0];
-              console.log(product);
+              const variant = product.variants[0];
+              var variantUrl = `https://assesmentcenter38.myshopify.com/products/${product.handle}?variant=${variant.id}`;
+              var productTemplate = `
+               <div class="product-wrap">
+                 <a href="${variantUrl}"> <img src="${product.images[0].src}" /></a>
+                 <a href="${variantUrl}">   <h4>${product.title}</h4> </a>
+                   <p class="price">${parseFloat(product.variants[0].priceV2.amount).toFixed(2)} ${product.variants[0].priceV2.currencyCode}</p>
+                   <a pid="${variant.id}" class="btn" href="#" onclick="addProductToCart(event, '${variantUrl}', '${product.id}')">In den Warenkorb</a>
+                </div>`;
               resolve();
               // resolve({ sku: sku, template: productTemplate });
             } else {
