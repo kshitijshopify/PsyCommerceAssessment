@@ -24,6 +24,8 @@ document.addEventListener('DOMContentLoaded', function () {
             if (products && products.length > 0) {
               const product = products[0];
               const variant = product.variants[0];
+              console.log(product);
+              console.log(variant)
               var variantUrl = 'https://assesmentcenter38.myshopify.com/products/' + product.handle + '?variant=' + variant.id;
               var productTemplate = `
                <div class="product-wrap">
