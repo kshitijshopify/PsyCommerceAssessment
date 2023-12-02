@@ -65,10 +65,10 @@ document.addEventListener('DOMContentLoaded', function () {
     .then(function (results) {
       results.forEach(function (result) {
         var regex = new RegExp('\\[product="' + result.sku + '"]', 'g');
-        console.log("Regex: ", regex);
-        console.log(result);
+        // console.log("Regex: ", regex);
+        // console.log(result);
         modifiedText = modifiedText.replace(regex, result.template);
-        console.log("result= " + JSON.stringify(result));
+        // console.log("result= " + JSON.stringify(result));
       });
       element.innerHTML = modifiedText;
     })
