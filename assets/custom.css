@@ -129,9 +129,6 @@ cart-drawer.is-empty .cstm_cart_upsell {
 }
 
 /* Blog post css */
-  .hide {
-    display: none;
-  }
 .product-wrap {
     display: block;
     margin: 10px auto;
