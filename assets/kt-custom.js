@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
           .then((products) => {
             if (products && products.length > 0) {
               const product = products[0];
-              const productTemplate =  getProductTemplateFromProduct(product;
+              const productTemplate = getProductTemplateFromProduct(product);
               resolve({ sku: sku, template: productTemplate });
             } else {
               reject(sku);
