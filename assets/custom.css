@@ -136,6 +136,7 @@ cart-drawer.is-empty .cstm_cart_upsell {
     display: block;
     margin: 10px auto;
     max-width: 300px;
+    min-height: 420px;
     border: 1px solid #eeeeee;
     padding: 10px;
     border-radius: 3px;

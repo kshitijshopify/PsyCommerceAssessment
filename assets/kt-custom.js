@@ -15,32 +15,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     return new Promise(function (resolve, reject) {
       function fetchData(sku) {
-        // var skuplain = sku.replaceAll('<span>', '').replaceAll('</span>', '');
-        // return storefront.product.fetchQuery({ query: '\"' + skuplain + '\"' })
         return storefront.product
           .fetchQuery({ query: '"' + sku + '"' })
           .then((products) => {
             if (products && products.length > 0) {
               const product = products[0];
               const variant = product.variants[0];
-              console.log(product);
-              console.log(variant);
-              var variantUrl =
-                "https://assesmentcenter38.myshopify.com/products/" +
-                product.handle +
-                "?variant=" +
-                variant.id;
-              console.log(variant.id);
-              console.log(product.id);
-              const productId = product.id.split("/").pop(); // Extracts the last part after the last '/'
-              const variantId = product.variants[0].id.split("/").pop(); // Extracts the last part after the last '/'
-              // var productTemplate = `
-              //  <div class="product-wrap">
-              //    <a href="${variantUrl}"> <img src="${product.images[0].src}" /></a>
-              //    <a href="${variantUrl}">   <h4>${product.title}</h4> </a>
-              //      <p class="price">${parseFloat(product.variants[0].priceV2.amount).toFixed(2)} ${product.variants[0].priceV2.currencyCode}</p>
-              //      <a pid="${variant.id}" class="btn" href="#" onclick="addProductToCart(event, '${variantUrl}', '${product.id}')">In den Warenkorb</a>
-              //   </div>`;
+              const productId = product.id.split("/").pop();
+              const variantId = product.variants[0].id.split("/").pop(); 
               const productTemplate = `
                 <div class="art_prod">
                   <link href="//assesmentcenter38.myshopify.com/cdn/shop/t/4/assets/component-rating.css?v=24573085263941240431701187368" rel="stylesheet" type="text/css" media="all">
