@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-  var element = document.querySelector('.article_text');
+  var element = document.querySelector('.article-template__content');
   var text = element.innerHTML;
   console.log("text= " + text);
   var regex = /\[product="(.*?)"/g;
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var replaceProduct = function (sku) {
     var storefront = ShopifyBuy.buildClient({
-      domain: 'pullup-and-dip.myshopify.com',
+      domain: 'assesmentcenter38.myshopify.com',
       storefrontAccessToken: 'd4949e66cf17b40633c85292b2fd93c7'
     });
     productSkus.push(sku);
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (products && products.length > 0) {
               const product = products[0];
               const variant = product.variants[0];
-              var variantUrl = 'https://pullup-and-dip.myshopify.com/products/' + product.handle + '?variant=' + variant.id;
+              var variantUrl = 'https://assesmentcenter38.myshopify.com/products/' + product.handle + '?variant=' + variant.id;
               // var productTemplate = `
               //  <div class="product-wrap">
               //    <a href="${variantUrl}"> <img src="${product.images[0].src}" /></a>
@@ -63,6 +63,8 @@ document.addEventListener('DOMContentLoaded', function () {
     .then(function (results) {
       results.forEach(function (result) {
         var regex = new RegExp('\\[product="' + result.sku + '"]', 'g');
+        console.log("Regex: ", regex);
+        console.log(result);
         modifiedText = modifiedText.replace(regex, result.template);
         console.log("result= " + JSON.stringify(result));
       });
