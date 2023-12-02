@@ -42,7 +42,10 @@ document.addEventListener("DOMContentLoaded", function () {
               //      <a pid="${variant.id}" class="btn" href="#" onclick="addProductToCart(event, '${variantUrl}', '${product.id}')">In den Warenkorb</a>
               //   </div>`;
               const productTemplate = `
-                <div class="card-wrapper product-card-wrapper underline-links-hover">
+                <div class="art_prod">
+                  <link href="//assesmentcenter38.myshopify.com/cdn/shop/t/4/assets/component-rating.css?v=24573085263941240431701187368" rel="stylesheet" type="text/css" media="all">
+              
+                  <div class="card-wrapper product-card-wrapper underline-links-hover">
                     <div class="card card--standard card--media" style="--ratio-percent: 100%">
                       <div class="card__inner color-background-2 gradient ratio" style="--ratio-percent: 100%">
                         <div class="card__media">
@@ -160,7 +163,8 @@ document.addEventListener("DOMContentLoaded", function () {
                       </div>
                     </div>
                   </div>
-                `;
+                </div>
+              `;
               resolve({ sku: sku, template: productTemplate });
             } else {
               reject(sku);
