@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
               //      <a pid="${variant.id}" class="btn" href="#" onclick="addProductToCart(event, '${variantUrl}', '${product.id}')">In den Warenkorb</a>
               //   </div>`;
               const productTemplate = `
-  <div class="card-wrapper product-card-wrapper underline-links-hover">
+ <div class="card-wrapper product-card-wrapper underline-links-hover">
     <div class="card card--standard card--media" style="--ratio-percent: 100%">
       <div class="card__inner color-background-2 gradient ratio" style="--ratio-percent: 100%">
         <div class="card__media">
@@ -59,9 +59,9 @@ document.addEventListener("DOMContentLoaded", function () {
             <h3 class="card__heading">
               <a
                 href="/products/${product.handle}"
-                id="StandardCardNoMediaLink-template--${product.id}"
+                id="StandardCardNoMediaLink-template--${product.id}__main-8903969079581"
                 class="full-unstyled-link"
-                aria-labelledby="StandardCardNoMediaLink-template--${product.id} NoMediaStandardBadge-template--${product.id}"
+                aria-labelledby="StandardCardNoMediaLink-template--${product.id}__main-8903969079581 NoMediaStandardBadge-template--${product.id}__main-8903969079581"
               >
                 ${product.title}
               </a>
@@ -72,12 +72,12 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
       <div class="card__content">
         <div class="card__information">
-          <h3 class="card__heading h5" id="title-template--${product.id}">
+          <h3 class="card__heading h5" id="title-template--${product.id}__main-8903969079581">
             <a
               href="/products/${product.handle}"
-              id="CardLink-template--${product.id}"
+              id="CardLink-template--${product.id}__main-8903969079581"
               class="full-unstyled-link"
-              aria-labelledby="CardLink-template--${product.id} Badge-template--${product.id}"
+              aria-labelledby="CardLink-template--${product.id}__main-8903969079581 Badge-template--${product.id}__main-8903969079581"
             >
               ${product.title}
             </a>
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <form
               method="post"
               action="/cart/add"
-              id="quick-add-template--${product.id}"
+              id="quick-add-template--${product.id}__main-8903969079581"
               accept-charset="UTF-8"
               class="form"
               enctype="multipart/form-data"
@@ -125,12 +125,12 @@ document.addEventListener("DOMContentLoaded", function () {
               <input type="hidden" name="utf8" value="✓" />
               <input type="hidden" name="id" value="${product.variants[0].id}" />
               <button
-                id="quick-add-template--${product.id}-submit"
+                id="quick-add-template--${product.id}__main-8903969079581-submit"
                 type="submit"
                 name="add"
                 class="quick-add__submit button button--full-width button--secondary"
                 aria-haspopup="dialog"
-                aria-labelledby="quick-add-template--${product.id}-submit title-template--${product.id}"
+                aria-labelledby="quick-add-template--${product.id}__main-8903969079581-submit title-template--${product.id}__main-8903969079581"
                 aria-live="polite"
                 data-sold-out-message="true"
               >
