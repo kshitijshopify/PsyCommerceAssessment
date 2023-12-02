@@ -140,9 +140,6 @@ cart-drawer.is-empty .cstm_cart_upsell {
     padding: 10px;
     border-radius: 3px;
 }
-  .art_prod:not(.hide+.art_prod) {
-    display: none;
-  }
 .art_prod .card__heading {
     font-weight: 400;
     font-size: 15px;
