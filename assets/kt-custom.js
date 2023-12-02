@@ -24,7 +24,6 @@ document.addEventListener("DOMContentLoaded", function () {
               const productId = product.id.split("/").pop();
               const variantId = product.variants[0].id.split("/").pop(); 
               const productTemplate = `
-                <div class="art_prod">
                   <link href="//assesmentcenter38.myshopify.com/cdn/shop/t/4/assets/component-rating.css?v=24573085263941240431701187368" rel="stylesheet" type="text/css" media="all">
               
                   <div class="card-wrapper product-card-wrapper underline-links-hover">
@@ -145,7 +144,6 @@ document.addEventListener("DOMContentLoaded", function () {
                       </div>
                     </div>
                   </div>
-                </div>
               `;
               resolve({ sku: sku, template: productTemplate });
             } else {
