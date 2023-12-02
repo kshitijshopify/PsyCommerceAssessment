@@ -12,13 +12,13 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     console.log(sku);
     productSkus.push(sku);
-    
+
     return new Promise(function (resolve, reject) {
       function fetchData(sku) {
         // var skuplain = sku.replaceAll('<span>', '').replaceAll('</span>', '');
         return storefront.product.fetchQuery({ query: '\"' + skuplain + '\"' })
           .then(products => {
-              console.log(products);
+            if (products && products.length > 0) {
               resolve({ sku: sku, template: productTemplate });
             } else {
               reject(sku);
