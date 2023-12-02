@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
   while (match = regex.exec(text)) {
     var sku = match[1];
     console.log(sku);
-    // promises.push(replaceProduct(sku));
+    promises.push(replaceProduct(sku));
   }
 
   Promise.all(promises)
