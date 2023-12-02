@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
                    <p class="price">${parseFloat(product.variants[0].priceV2.amount).toFixed(2)} ${product.variants[0].priceV2.currencyCode}</p>
                    <a pid="${variant.id}" class="btn" href="#" onclick="addProductToCart(event, '${variantUrl}', '${product.id}')">In den Warenkorb</a>
                 </div>`;
-              resolve();
+              resolve(productTemplate);
               // resolve({ sku: sku, template: productTemplate });
             } else {
               reject(sku);
@@ -51,7 +51,6 @@ document.addEventListener('DOMContentLoaded', function () {
   var promises = [];
   var match;
   while (match = regex.exec(text)) {
-    console.log(match);
     var sku = match[1];
     console.log(sku);
     promises.push(replaceProduct(sku));
@@ -60,8 +59,8 @@ document.addEventListener('DOMContentLoaded', function () {
   Promise.all(promises)
     .then(function (results) {
       results.forEach(function (result) {
+        console.log(result);
         var regex = new RegExp('\\[product="' + result.sku + '"]', 'g');
-        console.lof("Regex", regex)
         modifiedText = modifiedText.replace(regex, result.template);
         console.log("result= " + JSON.stringify(result));
       });
