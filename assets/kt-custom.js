@@ -11,7 +11,9 @@ document.addEventListener("DOMContentLoaded", function () {
       storefrontAccessToken: "d4949e66cf17b40633c85292b2fd93c7",
     });
     productSkus.push(sku);
+
     return new Promise(function (resolve, reject) {
+      function fetchData(sku) {
         return storefront.product
           .fetchQuery({ query: '"' + sku + '"' })
           .then((products) => {
@@ -27,6 +29,8 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Error:", error);
             reject(sku);
           });
+      }
+      fetchData(sku);
     });
   };
 
