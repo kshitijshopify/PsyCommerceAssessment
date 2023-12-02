@@ -1,6 +1,5 @@
-document.addEventListener('DOMContentLoaded', function () {
-  var element = document.querySelector('.article-template__content');
-  console.log("Element: ", element);
+document.addEventListener("DOMContentLoaded", function () {
+  var element = document.querySelector(".article-template__content");
   var text = element.innerHTML;
   var regex = /\[product="(.*?)"/g;
   var productSkus = [];
@@ -9,54 +8,173 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var replaceProduct = function (sku) {
     var storefront = ShopifyBuy.buildClient({
-      domain: 'assesmentcenter38.myshopify.com',
-      storefrontAccessToken: 'd4949e66cf17b40633c85292b2fd93c7'
+      domain: "assesmentcenter38.myshopify.com",
+      storefrontAccessToken: "d4949e66cf17b40633c85292b2fd93c7",
     });
     productSkus.push(sku);
 
     return new Promise(function (resolve, reject) {
-
       function fetchData(sku) {
         // var skuplain = sku.replaceAll('<span>', '').replaceAll('</span>', '');
         // return storefront.product.fetchQuery({ query: '\"' + skuplain + '\"' })
-        return storefront.product.fetchQuery({ query: '\"' + sku + '\"' })
-          .then(products => {
+        return storefront.product
+          .fetchQuery({ query: '"' + sku + '"' })
+          .then((products) => {
             if (products && products.length > 0) {
               const product = products[0];
               const variant = product.variants[0];
               console.log(product);
-              console.log(variant)
-              var variantUrl = 'https://assesmentcenter38.myshopify.com/products/' + product.handle + '?variant=' + variant.id;
-              var productTemplate = `
-               <div class="product-wrap">
-                 <a href="${variantUrl}"> <img src="${product.images[0].src}" /></a>
-                 <a href="${variantUrl}">   <h4>${product.title}</h4> </a>
-                   <p class="price">${parseFloat(product.variants[0].priceV2.amount).toFixed(2)} ${product.variants[0].priceV2.currencyCode}</p>
-                   <a pid="${variant.id}" class="btn" href="#" onclick="addProductToCart(event, '${variantUrl}', '${product.id}')">In den Warenkorb</a>
-                </div>`;
-              // const productTemplate = `
-              //         <div class="art_prod">
-              //           {% render 'card-product', card_product: product, lazy_load: true, section_id: section.id, show_quick_add: true %}
-              //         </div>`
+              console.log(variant);
+              var variantUrl =
+                "https://assesmentcenter38.myshopify.com/products/" +
+                product.handle +
+                "?variant=" +
+                variant.id;
+              // var productTemplate = `
+              //  <div class="product-wrap">
+              //    <a href="${variantUrl}"> <img src="${product.images[0].src}" /></a>
+              //    <a href="${variantUrl}">   <h4>${product.title}</h4> </a>
+              //      <p class="price">${parseFloat(product.variants[0].priceV2.amount).toFixed(2)} ${product.variants[0].priceV2.currencyCode}</p>
+              //      <a pid="${variant.id}" class="btn" href="#" onclick="addProductToCart(event, '${variantUrl}', '${product.id}')">In den Warenkorb</a>
+              //   </div>`;
+              const productTemplate = `
+  <div class="card-wrapper product-card-wrapper underline-links-hover">
+    <div class="card card--standard card--media" style="--ratio-percent: 100%">
+      <div class="card__inner color-background-2 gradient ratio" style="--ratio-percent: 100%">
+        <div class="card__media">
+          <div class="media media--transparent media--hover-effect">
+            <img
+              src="${product.images[0].src}"
+              sizes="(min-width: 1600px) 367px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
+              alt="${product.images[0].altText}"
+              class="motion-reduce"
+              loading="lazy"
+              width="${product.images[0].width}"
+              height="${product.images[0].height}"
+            />
+          </div>
+        </div>
+        <div class="card__content">
+          <div class="card__information">
+            <h3 class="card__heading">
+              <a
+                href="/products/${product.handle}"
+                id="StandardCardNoMediaLink-template--${product.id}"
+                class="full-unstyled-link"
+                aria-labelledby="StandardCardNoMediaLink-template--${product.id} NoMediaStandardBadge-template--${product.id}"
+              >
+                ${product.title}
+              </a>
+            </h3>
+          </div>
+          <div class="card__badge bottom left"></div>
+        </div>
+      </div>
+      <div class="card__content">
+        <div class="card__information">
+          <h3 class="card__heading h5" id="title-template--${product.id}">
+            <a
+              href="/products/${product.handle}"
+              id="CardLink-template--${product.id}"
+              class="full-unstyled-link"
+              aria-labelledby="CardLink-template--${product.id} Badge-template--${product.id}"
+            >
+              ${product.title}
+            </a>
+          </h3>
+          <div class="card-information">
+            <span class="caption-large light"></span>
+            <div class="price">
+              <div class="price__container">
+                <div class="price__regular">
+                  <span class="visually-hidden visually-hidden--inline">Regular price</span>
+                  <span class="price-item price-item--regular">${product.variants[0].price.amount} ${product.variants[0].price.currencyCode}</span>
+                </div>
+                <div class="price__sale">
+                  <span class="visually-hidden visually-hidden--inline">Regular price</span>
+                  <s class="price-item price-item--regular"> </s>
+                  <span class="visually-hidden visually-hidden--inline">Sale price</span>
+                  <span class="price-item price-item--sale price-item--last">${product.variants[0].price.amount} ${product.variants[0].price.currencyCode}</span>
+                </div>
+                <small class="unit-price caption hidden">
+                  <span class="visually-hidden">Unit price</span>
+                  <span class="price-item price-item--last">
+                    <span></span>
+                    <span aria-hidden="true">/</span>
+                    <span class="visually-hidden">&nbsp;per&nbsp;</span>
+                    <span> </span>
+                  </span>
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="quick-add no-js-hidden">
+          <product-form>
+            <form
+              method="post"
+              action="/cart/add"
+              id="quick-add-template--${product.id}"
+              accept-charset="UTF-8"
+              class="form"
+              enctype="multipart/form-data"
+              novalidate="novalidate"
+              data-type="add-to-cart-form"
+            >
+              <input type="hidden" name="form_type" value="product" />
+              <input type="hidden" name="utf8" value="✓" />
+              <input type="hidden" name="id" value="${product.variants[0].id}" />
+              <button
+                id="quick-add-template--${product.id}-submit"
+                type="submit"
+                name="add"
+                class="quick-add__submit button button--full-width button--secondary"
+                aria-haspopup="dialog"
+                aria-labelledby="quick-add-template--${product.id}-submit title-template--${product.id}"
+                aria-live="polite"
+                data-sold-out-message="true"
+              >
+                <span>Add to cart </span>
+                <span class="sold-out-message hidden"> Sold out </span>
+                <div class="loading-overlay__spinner hidden">
+                  <svg
+                    aria-hidden="true"
+                    focusable="false"
+                    class="spinner"
+                    viewBox="0 0 66 66"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                  </svg>
+                </div>
+              </button>
+              <input type="hidden" name="product-id" value="${product.id}" />
+            </form>
+          </product-form>
+        </div>
+        <div class="card__badge bottom left"></div>
+      </div>
+    </div>
+  </div>
+`;
               resolve({ sku: sku, template: productTemplate });
             } else {
               reject(sku);
             }
           })
-          .catch(error => {
-            console.error('Error:', error);
+          .catch((error) => {
+            console.error("Error:", error);
             reject(sku);
           });
       }
 
       fetchData(sku);
-
     });
   };
 
   var promises = [];
   var match;
-  while (match = regex.exec(text)) {
+  while ((match = regex.exec(text))) {
     var sku = match[1];
     promises.push(replaceProduct(sku));
   }
@@ -64,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function () {
   Promise.all(promises)
     .then(function (results) {
       results.forEach(function (result) {
-        var regex = new RegExp('\\[product="' + result.sku + '"]', 'g');
+        var regex = new RegExp('\\[product="' + result.sku + '"]', "g");
         // console.log("Regex: ", regex);
         // console.log(result);
         modifiedText = modifiedText.replace(regex, result.template);
