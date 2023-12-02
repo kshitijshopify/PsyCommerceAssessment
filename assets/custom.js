@@ -18,7 +18,9 @@ document.addEventListener('DOMContentLoaded', function () {
       function fetchData(sku) {
         var skuplain = sku.replaceAll('<span>', '').replaceAll('</span>', '');
         console.log(skuplain)
-        return storefront.product.fetchQuery({ query: '\"' + skuplain + '\"' })
+        // return storefront.product.fetchQuery({ query: '\"' + skuplain + '\"' })
+        
+        return storefront.product.fetchQuery({ query: '\"' + sku + '\"' })
           .then(products => {
             if (products && products.length > 0) {
               resolve({ sku: sku, template: productTemplate });
