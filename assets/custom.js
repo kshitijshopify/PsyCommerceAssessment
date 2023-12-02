@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var promises = [];
   var match;
   while (match = regex.exec(text)) {
+    console.log(match);
     var sku = match[1];
     console.log(sku);
     promises.push(replaceProduct(sku));
