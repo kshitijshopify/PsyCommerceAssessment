@@ -78,6 +78,7 @@
               {% endfor %}
             {% endfor %}
             {{ articleContent | append: productData }}
+            {% assign productData = "" %}}
           {% endfor %}
         </div>
 
