@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const element = document.querySelector(".article-template__content");
   const text = element.innerHTML;
   const regex = /\[product="(.*?)"/g;
+  const productSkus = [];
   let modifiedText = text;
 
   const replaceProduct = function (sku) {
@@ -9,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
       domain: "assesmentcenter38.myshopify.com",
       storefrontAccessToken: "d4949e66cf17b40633c85292b2fd93c7",
     });
+    productSkus.push(sku);
     return new Promise(function (resolve, reject) {
         return storefront.product
           .fetchQuery({ query: '"' + sku + '"' })
@@ -28,17 +30,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   };
 
-  const promises = [];
-  let match;
+  var promises = [];
+  var match;
   while ((match = regex.exec(text))) {
-    const sku = match[1];
+    var sku = match[1];
     promises.push(replaceProduct(sku));
   }
 
   Promise.all(promises)
     .then(function (results) {
       results.forEach(function (result) {
-        const regex = new RegExp('\\[product="' + result.sku + '"]', "g");
+        var regex = new RegExp('\\[product="' + result.sku + '"]', "g");
         modifiedText = modifiedText.replace(regex, result.template);
       });
       element.innerHTML = modifiedText;
