@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
     .then(function (results) {
       results.forEach(function (result) {
         var regex = new RegExp('\\[product="' + result.sku + '"]', 'g');
+        console.lof("Regex", regex)
         modifiedText = modifiedText.replace(regex, result.template);
         console.log("result= " + JSON.stringify(result));
       });
