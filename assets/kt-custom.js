@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
     productSkus.push(sku);
 
     return new Promise(function (resolve, reject) {
-      function fetchData(sku) {
         return storefront.product
           .fetchQuery({ query: '"' + sku + '"' })
           .then((products) => {
@@ -29,22 +28,20 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Error:", error);
             reject(sku);
           });
-      }
-      fetchData(sku);
     });
   };
 
-  var promises = [];
-  var match;
+  const promises = [];
+  let match;
   while ((match = regex.exec(text))) {
-    var sku = match[1];
+    const sku = match[1];
     promises.push(replaceProduct(sku));
   }
 
   Promise.all(promises)
     .then(function (results) {
       results.forEach(function (result) {
-        var regex = new RegExp('\\[product="' + result.sku + '"]', "g");
+        const regex = new RegExp('\\[product="' + result.sku + '"]', "g");
         modifiedText = modifiedText.replace(regex, result.template);
       });
       element.innerHTML = modifiedText;
