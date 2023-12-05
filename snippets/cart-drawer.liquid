@@ -388,6 +388,7 @@
                   <div class="upsell_single">
                     {% render 'cstm_upsell_card', card_product: product, section_id: section.id %}
                   </div>
+                  {% break %}
                 {% endif %}
               {% endfor %}
             {% endif %}
