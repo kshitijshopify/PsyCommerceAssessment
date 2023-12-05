@@ -1,17 +1,22 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const element = document.querySelector(".article-template__content");
-  const text = element.innerHTML;
+  const wrappingElement = document.querySelector(".article-template__content");
+  const text = wrappingElement.innerHTML;
+  const storefront = window.ShopifyBuy.buildClient({
+    domain: "assesmentcenter38.myshopify.com",
+    storefrontAccessToken: "d4949e66cf17b40633c85292b2fd93c7",
+  });
+
   const regex = /\[product="(.*?)"/g;
-  const productSkus = [];
-  let modifiedText = text;
+  const promises = [];
+  let match;
+  while ((match = regex.exec(text))) {
+    const sku = match[1];
+    promises.push(replaceProduct(sku, storefront));
+  }
+  await renderProductWrap(promises, wrappingElement, text);
+});
 
-  const replaceProduct = function (sku) {
-    const storefront = window.ShopifyBuy.buildClient({
-      domain: "assesmentcenter38.myshopify.com",
-      storefrontAccessToken: "d4949e66cf17b40633c85292b2fd93c7",
-    });
-    productSkus.push(sku);
-
+const replaceProduct = function (sku, storefront) {  
     return new Promise(function (resolve, reject) {
         return storefront.product
           .fetchQuery({ query: '"' + sku + '"' })
@@ -31,25 +36,19 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   };
 
-  const promises = [];
-  let match;
-  while ((match = regex.exec(text))) {
-    const sku = match[1];
-    promises.push(replaceProduct(sku));
-  }
-
-  Promise.all(promises)
-    .then(function (results) {
-      results.forEach(function (result) {
-        const regex = new RegExp('\\[product="' + result.sku + '"]', "g");
-        modifiedText = modifiedText.replace(regex, result.template);
-      });
-      element.innerHTML = modifiedText;
-    })
-    .catch(function (failedSku) {
-      console.log("Failed to fetch product with SKU: " + failedSku);
+async function renderProductWrap(promises, wrappingElement, text) {
+  let modifiedText = text;
+  try {
+    const results = await Promise.all(promises);
+    results.forEach(function (result) {
+      const regex = new RegExp('\\[product="' + result.sku + '"]', "g");
+      modifiedText = modifiedText.replace(regex, result.template);
     });
-});
+    element.innerHTML = modifiedText;
+  } catch (failedSku) {
+    console.log("Failed to fetch product with SKU: " + failedSku);
+  }
+}
 
 function getProductTemplateFromProduct(product) {
   const productId = product.id.split("/").pop();
