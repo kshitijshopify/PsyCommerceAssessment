@@ -383,7 +383,7 @@
                   </div>
                 {% endif %}
               {% endfor %}
-            {% elsif upsell_product != blank %}
+            {% else %}
               {% for product in upsell_product %}
                 {% if product.selected_or_first_available_variant.available %}
                   <div class="upsell_single www">
@@ -392,7 +392,6 @@
                 {% endif %}
               {% endfor %}
             {% endif %}
-            {{ one_product }}
           {% endfor %}
         </div>
       </div>
