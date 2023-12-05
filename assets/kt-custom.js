@@ -54,6 +54,20 @@ document.addEventListener("DOMContentLoaded", function () {
 function getProductTemplateFromProduct(product) {
   const productId = product.id.split("/").pop();
   const variantId = product.variants[0].id.split("/").pop(); 
+  const priceAmount = product.variants[0].price.amount;
+const currencyCode = product.variants[0].price.currencyCode;
+  
+  // Format the number with the desired currency and formatting options
+  const formattedPrice = new Intl.NumberFormat('de-DE', {
+    style: 'currency',
+    currency: currencyCode,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(priceAmount);
+
+  // priceElement.innerHTML = `<span class="price-item price-item--regular">${formattedPrice}</span>`;
+  // <span class="price-item price-item--sale price-item--last">${product.variants[0].price.amount} ${product.variants[0].price.currencyCode}</span>
+  
   return `<link href="//assesmentcenter38.myshopify.com/cdn/shop/t/4/assets/component-rating.css?v=24573085263941240431701187368" rel="stylesheet" type="text/css" media="all">
    
           <div class="card-wrapper product-card-wrapper underline-links-hover">
@@ -106,7 +120,7 @@ function getProductTemplateFromProduct(product) {
                       <div class="price__container">
                         <div class="price__regular">
                           <span class="visually-hidden visually-hidden--inline">Regular price</span>
-                          <span class="price-item price-item--regular">${product.variants[0].price.amount} ${product.variants[0].price.currencyCode}</span>
+                          <span class="price-item price-item--regular">${formattedPrice}</span>
                         </div>
                         <div class="price__sale">
                           <span class="visually-hidden visually-hidden--inline">Regular price</span>
