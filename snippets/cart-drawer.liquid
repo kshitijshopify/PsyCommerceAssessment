@@ -382,14 +382,6 @@
                   </div>
                 {% endif %}
               {% endfor %}
-            {% else %}
-              {% for product in upsell_product %}
-                {% if product.selected_or_first_available_variant.available %}
-                  <div class="upsell_single www">
-                    {% render 'cstm_upsell_card', card_product: product, section_id: section.id %}
-                  </div>
-                {% endif %}
-              {% endfor %}
             {% endif %}
           {% endfor %}
         </div>
