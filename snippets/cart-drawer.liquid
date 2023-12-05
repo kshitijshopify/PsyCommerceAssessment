@@ -393,7 +393,7 @@
                 {% endif %}
               {% endfor %}
             {% endif %}
-            {% break %}
+            {% if one_product == true %}{% continue %}{% endif %}
           {% endfor %}
         </div>
       </div>
