@@ -129,25 +129,23 @@ cart-drawer.is-empty .cstm_cart_upsell {
 }
 
 /* Blog post css */
-  .hide {
-    display: none;
-  }
-.art_prod {
+.product-wrap {
     display: block;
     margin: 10px auto;
     max-width: 300px;
+    min-height: 420px;
     border: 1px solid #eeeeee;
     padding: 10px;
     border-radius: 3px;
 }
-.art_prod .card__heading {
+.product-wrap .card__heading {
     font-weight: 400;
     font-size: 15px;
     line-height: 1.13;
     color: #000;
     text-align: left;
 }
-.art_prod .quick-add__submit {
+.product-wrap .quick-add__submit {
     font-weight: 500;
     font-size: 14px;
     line-height: 20px;
@@ -161,7 +159,7 @@ cart-drawer.is-empty .cstm_cart_upsell {
     width: auto;
     min-height: auto;
 }
-.art_prod .card__information {
+.product-wrap .card__information {
     padding: 19px 0 7px;
 }
 /* Responsive Css */
