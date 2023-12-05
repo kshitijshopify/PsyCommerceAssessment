@@ -1,0 +1,47 @@
+{%- if card_product and card_product != empty -%}
+    <img src="{{ card_product.featured_image | img_url:'master' }}">
+    <p class="pro_title">{{ card_product.title }}</p>
+    <div class="quick-add no-js-hidden">
+      {%- liquid
+        assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id
+        assign qty_rules = false
+        if card_product.selected_or_first_available_variant.quantity_rule.min > 1 or card_product.selected_or_first_available_variant.quantity_rule.max != null or card_product.selected_or_first_available_variant.quantity_rule.increment > 1
+          assign qty_rules = true
+        endif
+      -%}
+      <product-form>
+        {%- form 'product',
+          card_product,
+          id: product_form_id,
+          class: 'form',
+          novalidate: 'novalidate',
+          data-type: 'add-to-cart-form'
+        -%}
+          <input
+            type="hidden"
+            name="id"
+            value="{{ card_product.selected_or_first_available_variant.id }}"
+            disabled
+          >
+          <button
+            id="{{ product_form_id }}-submit"
+            type="submit"
+            name="add"
+            class="quick-add__submit{% if card_product.selected_or_first_available_variant.available == false %} sold_out{% endif %}"
+            aria-haspopup="dialog"
+            aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}"
+            aria-live="polite"
+            data-sold-out-message="true"
+            {% if card_product.selected_or_first_available_variant.available == false %}
+              disabled
+            {% endif %}
+          >
+            <span class="quick_icon">
+              {% render 'cstm_quick_icon' %}
+            </span>
+          </button>
+        {%- endform -%}
+      </product-form>
+    </div>
+  {%- endif -%}
+  
